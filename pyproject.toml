@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "judgment-layer"
+version = "0.1.0"
+description = "判断层：存判断不存事实，判断可被推翻且全程留痕"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Ghill-0131" }]
+keywords = ["agent", "memory", "judgment", "belief-revision", "llm"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.scripts]
+judgment-layer = "judgment_layer.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/Ghill-0131/judgment-layer"
+
+[tool.setuptools.packages.find]
+where = ["src"]

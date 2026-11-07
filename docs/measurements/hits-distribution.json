@@ -1,0 +1,47 @@
+{
+  "generated_from": "D:\\dsh-data\\journal\\journal.jsonl",
+  "total": 246,
+  "zero_hits": 149,
+  "zero_hits_ratio": 0.6057,
+  "max_hits": 4,
+  "distribution": {
+    "0": 149,
+    "1": 62,
+    "2": 17,
+    "3": 9,
+    "4": 9
+  },
+  "by_level": {
+    "S": {
+      "total": 29,
+      "zero_hits": 19,
+      "max_hits": 4
+    },
+    "A": {
+      "total": 89,
+      "zero_hits": 52,
+      "max_hits": 4
+    },
+    "B": {
+      "total": 61,
+      "zero_hits": 29,
+      "max_hits": 4
+    },
+    "C": {
+      "total": 4,
+      "zero_hits": 3,
+      "max_hits": 1
+    },
+    "E": {
+      "total": 13,
+      "zero_hits": 11,
+      "max_hits": 1
+    },
+    "K": {
+      "total": 50,
+      "zero_hits": 35,
+      "max_hits": 2
+    }
+  },
+  "note": "hits 由 journal search 命中时自增；null 视为 0。"
+}
