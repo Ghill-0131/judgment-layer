@@ -199,6 +199,14 @@ def check_numbers_fresh() -> tuple[bool, str]:
 
 
 def main() -> int:
+    # Windows CI（以及某些本地控制台）默认不是 UTF-8，直接 print 中文会死在
+    # 'charmap' codec 上。先把本进程的输出流切到 UTF-8。
+    for stream in (sys.stdout, sys.stderr):
+        try:
+            stream.reconfigure(encoding="utf-8", errors="replace")
+        except Exception:
+            pass
+
     checks = [
         ("协议示例自合规", check_protocol_examples),
         ("examples 自合规", check_examples_file),
