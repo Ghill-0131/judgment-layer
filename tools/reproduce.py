@@ -2,7 +2,7 @@
 """重算 240 条日志的命中分布，输出 hits-distribution.json
 
 用法：python reproduce.py
-输入：journal.jsonl 路径（用 --journal 或 JOURNAL 环境变量指定）
+输入：journal.jsonl（可用 JOURNAL 环境变量覆盖）
 """
 import json
 import os

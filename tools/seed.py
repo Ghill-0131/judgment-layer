@@ -2,7 +2,7 @@
 """从本机日志抽出真实判断，生成 judgments.jsonl。
 
 一次性脚本，不是产品的一部分。跑完产物进仓库，日志本身不进。
-所有证据都能顺着 ref 查回原始日志或书库。
+所有证据都能顺着 ref 查回 journal 或 books。
 """
 import json
 import sys

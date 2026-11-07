@@ -1,11 +1,11 @@
 {
   "generated_from": "D:\\dsh-data\\journal\\journal.jsonl",
-  "total": 246,
-  "zero_hits": 149,
-  "zero_hits_ratio": 0.6057,
+  "total": 247,
+  "zero_hits": 150,
+  "zero_hits_ratio": 0.6073,
   "max_hits": 4,
   "distribution": {
-    "0": 149,
+    "0": 150,
     "1": 62,
     "2": 17,
     "3": 9,
@@ -18,8 +18,8 @@
       "max_hits": 4
     },
     "A": {
-      "total": 89,
-      "zero_hits": 52,
+      "total": 90,
+      "zero_hits": 53,
       "max_hits": 4
     },
     "B": {

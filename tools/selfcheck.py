@@ -135,6 +135,32 @@ def check_all_md_json() -> tuple[bool, str]:
     return True, "%d 个文件里 %d 个 json 块全部可解析" % (len(files), total)
 
 
+def check_self_distilled() -> tuple[bool, str]:
+    """自我蒸馏出来的那批，反例必须有真出处。
+
+    这是整个项目最硬的一条对照：
+      书里抄来的判断 —— 反例是推想的，全是 W12 警告
+      自己撞出来的判断 —— 反例有真出处，零警告
+    """
+    sys.path.insert(0, str(ROOT / "src"))
+    from judgment_layer.validator import load_jsonl, validate, warnings_of  # noqa: E402
+
+    path = ROOT / "data" / "self-distilled.jsonl"
+    if not path.exists():
+        return True, "SKIP 没有自我蒸馏文件"
+    records = load_jsonl(path)
+    problems = []
+    for rec in records:
+        errs = validate(rec)
+        if errs:
+            problems.append("%s 不合规" % rec.get("statement", "")[:16])
+        if not isinstance(rec.get("counterexample_ref"), dict):
+            problems.append("%s 反例无出处" % rec.get("statement", "")[:16])
+    if problems:
+        return False, "；".join(problems[:3])
+    return True, "%d 条全部合规，且反例都有真出处" % len(records)
+
+
 def check_numbers_fresh() -> tuple[bool, str]:
     """如果本机有日志，核对图上的数字能不能现算出来。
 
@@ -168,6 +194,7 @@ def main() -> int:
         ("规则真的会拦", check_rules_bite),
         ("编码报错是人话", check_encoding_errors),
         ("md 里 json 能解析", check_all_md_json),
+        ("自我蒸馏反例有出处", check_self_distilled),
         ("数字能现算", check_numbers_fresh),
     ]
     results = []
