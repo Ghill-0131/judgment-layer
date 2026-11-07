@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """一条命令跑完全部自检。
 
-任何改动之后都跑一遍。四个检查项，任一失败返回非零。
+任何改动之后都跑一遍。八项检查，任一失败返回非零。
 """
 import json
 import os
@@ -15,7 +15,13 @@ PY = sys.executable
 
 
 def run(cmd: list[str]) -> tuple[int, str]:
-    proc = subprocess.run(cmd, cwd=str(ROOT), capture_output=True, text=True, encoding="utf-8")
+    # 子进程的 stdout 编码跟着系统走（Windows 上常是 GBK，CI 上是 UTF-8）。
+    # 这里强制子进程也用 UTF-8 输出，否则父进程按 utf-8 解码会炸在中文上。
+    env = dict(os.environ, PYTHONIOENCODING="utf-8")
+    proc = subprocess.run(
+        cmd, cwd=str(ROOT), capture_output=True, text=True,
+        encoding="utf-8", errors="replace", env=env,
+    )
     return proc.returncode, (proc.stdout or "") + (proc.stderr or "")
 
 

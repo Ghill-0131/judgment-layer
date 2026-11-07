@@ -1,5 +1,7 @@
 # 判断层 · Judgment Layer
 
+[![selfcheck](https://github.com/Ghill-0131/judgment-layer/actions/workflows/ci.yml/badge.svg)](https://github.com/Ghill-0131/judgment-layer/actions/workflows/ci.yml)
+
 > 记忆系统存**事实**（世界是什么）。这个协议存**判断**（碰到这种情况该怎么做）。
 > 而判断可以被后来的证据推翻——全程留痕。
 
