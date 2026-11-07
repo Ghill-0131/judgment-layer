@@ -17,7 +17,13 @@ PY = sys.executable
 def run(cmd: list[str]) -> tuple[int, str]:
     # 子进程的 stdout 编码跟着系统走（Windows 上常是 GBK，CI 上是 UTF-8）。
     # 这里强制子进程也用 UTF-8 输出，否则父进程按 utf-8 解码会炸在中文上。
-    env = dict(os.environ, PYTHONIOENCODING="utf-8")
+    #
+    # PYTHONPATH 也由这里统一给：本机装过 editable 包所以 `python -m judgment_layer`
+    # 直接能跑，CI 里没装就报 No module named。自检不该依赖「本机装没装」这个变量。
+    env = dict(os.environ)
+    env["PYTHONIOENCODING"] = "utf-8"
+    src = str(ROOT / "src")
+    env["PYTHONPATH"] = src + (os.pathsep + env["PYTHONPATH"] if env.get("PYTHONPATH") else "")
     proc = subprocess.run(
         cmd, cwd=str(ROOT), capture_output=True, text=True,
         encoding="utf-8", errors="replace", env=env,
